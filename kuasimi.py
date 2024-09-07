@@ -52,7 +52,7 @@ async def call_gemini_api(image_data, prompt=DEFAULT_PROMPT):
             'DANGEROUS' : 'BLOCK_NONE'
         }):
             api_response_text += chunk.text
-            update_notification(api_response_text)
+        update_notification(api_response_text)  # Update notification after the full response
     except Exception as e:
         api_response_text = f"Error: {e}"
         update_notification(api_response_text)
@@ -62,7 +62,7 @@ def update_notification(text):
     global thumbnail_path
 
     subprocess.run(
-        ["dunstify", "-r", "222222", "-a", "Kua Simi?", "-i", thumbnail_path, "-t", "10000", "Kua Simi?",  text],
+        ["dunstify", "-r", "222222", "-a", "Kua Simi?", "-t", "10000", "Kua Simi?",  text],
         check=True
     )
 
@@ -105,3 +105,4 @@ def main():
 
 if __name__ == "__main__":
     main()
+
